@@ -1,5 +1,5 @@
 class BigBrother::Runner
-  def self.run(_cmd_line_args, options)
+  def self.run(cmd_line_args, options)
     if options[:version]
       print_version
     else
