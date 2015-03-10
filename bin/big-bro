@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
-require 'optparse'
+require_relative "../lib/big_brother"
+require "optparse"
 
 options = {}
 OptionParser.new do |opts|
@@ -11,8 +12,4 @@ OptionParser.new do |opts|
   end
 end.parse!
 
-if options[:version]
-  puts "1.0.0"
-else
-  puts "do the big-bro things"
-end
+BigBrother::Runner.run(ARGV, options)
