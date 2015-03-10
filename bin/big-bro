@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+
+options = {}
+OptionParser.new do |opts|
+  opts.banner = "Usage: big-bro [options]"
+
+  opts.on("-v", "--version", "Show version") do |v|
+    options[:version] = v
+  end
+end.parse!
+
+if options[:version]
+  puts "1.0.0"
+else
+  puts "do the big-bro things"
+end
