@@ -1,5 +1,4 @@
 class BigBrother::Runner
-
   def self.run(cmd_line_args, options)
     if options[:version]
       print_version
@@ -15,5 +14,4 @@ class BigBrother::Runner
   def self.do_other_stuff
     puts "Big bro runner template"
   end
-
 end
