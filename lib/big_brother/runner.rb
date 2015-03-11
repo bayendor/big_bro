@@ -3,10 +3,11 @@ require "optparse"
 class BigBrother::Runner
   def self.run(cmd_line_args)
     options = parse_options
+    help_message = options[:help_message]
     if options[:version]
       print_version
     elsif options[:help] || cmd_line_args.length == 0 || cmd_line_args.first == "help"
-      puts options[:help_message]
+      puts help_message
     else
       parse_cmd_line_args
     end
