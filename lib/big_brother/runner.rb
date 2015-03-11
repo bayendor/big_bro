@@ -6,7 +6,7 @@ class BigBrother::Runner
     help_message = options[:help_message]
     if options[:version]
       print_version
-    elsif options[:help] || cmd_line_args.length == 0 || cmd_line_args.first == "help"
+    elsif options[:help] || cmd_line_args.empty? || cmd_line_args[0] == "help"
       puts help_message
     else
       parse_cmd_line_args
