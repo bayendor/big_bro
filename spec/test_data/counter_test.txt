@@ -1,0 +1,16 @@
+git init
+git init
+git init
+git init
+
+git status
+git status
+git status
+
+git
+
+something_else
+something_else
+something_else
+something_else
+something_else

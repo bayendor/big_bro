@@ -3,12 +3,12 @@ require "json"
 class BigBrother::Counter
   IGNORED_COMMANDS = ["export"]
 
-  def self.count_commands_json
-    count_commands.to_json
+  def self.count_commands_json(file = BigBrother::HISTORY_FILE)
+    count_commands(file).to_json
   end
 
-  def self.count_commands
-    commands = normalize_commands(BigBrother::Reader.lines_from_history_file)
+  def self.count_commands(file = BigBrother::HISTORY_FILE)
+    commands = normalize_commands(BigBrother::Reader.lines_from_history_file(file))
     commands = reject_ignored_commands(commands)
     commands.each_with_object({}) do |(command, argument), count_hash|
       count_hash[command] ||= {}
