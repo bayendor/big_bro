@@ -8,7 +8,8 @@ class BigBrother::Counter
   end
 
   def self.count_commands(file = BigBrother::HISTORY_FILE)
-    commands = normalize_commands(BigBrother::Reader.lines_from_history_file(file))
+    lines = BigBrother::Reader.lines_from_history_file(file)
+    commands = normalize_commands(lines)
     commands = reject_ignored_commands(commands)
     commands.each_with_object({}) do |(command, argument), count_hash|
       count_hash[command] ||= {}
@@ -24,7 +25,7 @@ class BigBrother::Counter
   end
 
   def self.reject_ignored_commands(commands)
-    commands.reject do |cmd, arg|
+    commands.reject do |cmd, _arg|
       IGNORED_COMMANDS.include? cmd.downcase
     end
   end
