@@ -1,15 +1,5 @@
 #!/usr/bin/env ruby
 
 require_relative "../lib/big_brother"
-require "optparse"
 
-options = {}
-OptionParser.new do |opts|
-  opts.banner = "Usage: big-bro [options]"
-
-  opts.on("-v", "--version", "Show version") do |v|
-    options[:version] = v
-  end
-end.parse!
-
-BigBrother::Runner.run(ARGV, options)
+BigBrother::Runner.run(ARGV)
