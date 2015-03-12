@@ -9,7 +9,7 @@ class BigBrother::Runner
     elsif options[:help] || cmd_line_args.empty? || cmd_line_args[0] == "help"
       puts help_message
     else
-      parse_cmd_line_args
+      parse_cmd_line_args(cmd_line_args)
     end
   end
 
@@ -34,7 +34,11 @@ class BigBrother::Runner
     puts BigBrother::VERSION
   end
 
-  def self.parse_cmd_line_args
-    puts "Big bro runner template"
+  def self.parse_cmd_line_args(args)
+    if args[0] == "json"
+      puts BigBrother::Counter.count_commands_json
+    else
+      puts "Big bro runner template"
+    end
   end
 end
