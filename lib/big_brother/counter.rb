@@ -4,7 +4,7 @@ class BigBrother::Counter
   IGNORED_COMMANDS = ["export"]
 
   def self.count_commands_json(file = BigBrother::Settings.get("history_file"))
-    count_commands(file).to_json
+    { api_key: BigBrother::Settings.get("api_key"), commands: count_commands(file) }.to_json
   end
 
   def self.count_commands(file = BigBrother::Settings.get("history_file"))
