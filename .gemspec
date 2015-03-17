@@ -1,6 +1,8 @@
+require_relative "lib/big_brother/version"
+
 Gem::Specification.new do |s|
-  s.name        = 'Lil Bro'
-  s.version     = '1.0.0'
+  s.name        = 'big_bro'
+  s.version     = BigBrother::VERSION
   s.licenses    = ['MIT']
   s.summary     = "CLI hook to Big Brother"
   s.description = "Pushes data from your terminal history up to the Ministry of Truth"
