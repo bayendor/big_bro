@@ -1,7 +1,7 @@
 class BigBrother::Pusher
-  def push
+  def self.push
     json = BigBrother::Counter.count_commands_json
-    url = "something"
-    `curl -X PUT #{url} data=#{json}`
+    url  = "http://localhost:3000/api/users"
+    `curl -X PUT --data big_bro='#{json}' #{url}`
   end
 end
