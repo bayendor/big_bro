@@ -40,6 +40,8 @@ class BigBrother::Runner
       stdout.puts BigBrother::Counter.count_commands_json
     elsif args[0] == "config"
       config_commands(args)
+    elsif args[0] == "push"
+      BigBrother::Pusher.push
     else
       stdout.puts "Big bro runner template"
     end

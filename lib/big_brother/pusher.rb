@@ -1,7 +1,22 @@
+require "faraday"
+require "tmpdir"
+
 class BigBrother::Pusher
+  def self.temp_path
+    File.expand_path "big_bro.json", Dir.tmpdir
+  end
+
   def self.push
     json = BigBrother::Counter.count_commands_json
-    url  = "http://localhost:3000/api/users"
-    `curl -X PUT --data big_bro='#{json}' #{url}`
+    File.write temp_path, json
+    conn = Faraday.new("http://localhost:3000") do |f|
+      f.request :multipart
+      f.request :url_encoded
+      f.adapter :net_http
+    end
+
+    payload = { file: Faraday::UploadIO.new(temp_path, "text/plain") }
+
+    conn.put("/api/users", payload)
   end
 end
