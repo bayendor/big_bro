@@ -17,6 +17,8 @@ class BigBrother::Pusher
 
     payload = { file: Faraday::UploadIO.new(temp_path, "text/plain") }
 
-    conn.put("/api/users", payload)
+    if conn.put("/api/users", payload).status == 200
+      BigBrother::Reader.move_history_file
+    end
   end
 end
