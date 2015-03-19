@@ -12,7 +12,7 @@ class BigBrother::Settings
   def self.defaults
     {
       "history_file" => File.expand_path("~/.bash_history"),
-      "push_url" => "http://localhost:3000"
+      "push_url" => "http://localhost:3000",
       "api_key" => nil
     }
   end
