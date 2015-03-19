@@ -9,7 +9,7 @@ class BigBrother::Pusher
   def self.push
     json = BigBrother::Counter.count_commands_json
     File.write temp_path, json
-    conn = Faraday.new("http://localhost:3000") do |f|
+    conn = Faraday.new(BigBrother::Settings.get("push_url")) do |f|
       f.request :multipart
       f.request :url_encoded
       f.adapter :net_http
