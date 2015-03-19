@@ -1,7 +1,7 @@
 require "json"
 
 class BigBrother::Counter
-  IGNORED_COMMANDS = ["export"]
+  IGNORED_COMMANDS = ["export", "cd", "ls", "clear", "ssh", "ftp", "scp"]
 
   def self.count_commands_json(file = BigBrother::Settings.get("history_file"), api_key = nil)
     lines = BigBrother::Reader.lines_from_history_file(file)
