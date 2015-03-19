@@ -19,6 +19,9 @@ class BigBrother::Pusher
 
     if conn.put("/api/users", payload).status == 200
       BigBrother::Reader.move_history_file
+      puts "\e[32mUploaded successfully\e[39m"
+    else
+      puts "\e[31mError pushing to server, please try again\e[39m"
     end
   end
 end
