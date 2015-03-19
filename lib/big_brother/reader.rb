@@ -1,6 +1,7 @@
 class BigBrother::Reader
   def self.lines_from_history_file(filename)
     File.readlines(filename).map(&:strip).reject(&:empty?)
+    .map { |line| line.encode('UTF-8', 'binary', invalid: :replace, undef: :replace, replace: '') }
   end
 
   def self.move_history_file
