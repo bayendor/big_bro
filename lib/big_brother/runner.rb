@@ -1,14 +1,14 @@
 require "optparse"
 
 class BigBrother::Runner
-  def self.run(cmd_line_args)
+  def self.run(cmd_line_args, options = {})
     BigBrother::Settings.load
-    options = parse_options
+    options = parse_options.merge(options)
     help_message = options[:help_message]
     if options[:version]
       print_version
     elsif options[:help] || cmd_line_args.empty? || cmd_line_args[0] == "help"
-      puts help_message
+      stdout.puts help_message
     else
       parse_cmd_line_args(cmd_line_args)
     end
@@ -32,29 +32,39 @@ class BigBrother::Runner
   end
 
   def self.print_version
-    puts BigBrother::VERSION
+    stdout.puts BigBrother::VERSION
   end
 
   def self.parse_cmd_line_args(args)
     if args[0] == "json"
-      puts BigBrother::Counter.count_commands_json
+      stdout.puts BigBrother::Counter.count_commands_json
     elsif args[0] == "config"
       config_commands(args)
+    elsif args[0] == "push"
+      BigBrother::Pusher.push
     else
-      puts "Big bro runner template"
+      stdout.puts "Big bro runner template"
     end
   end
 
   def self.config_commands(args)
     if args[1] == "get"
-      return puts "needs a value to get" unless args[2]
-      puts "#{args[2]} is \"\e[34m#{BigBrother::Settings.get(args[2])}\e[39m\""
+      return stdout.puts "needs a value to get" unless args[2]
+      stdout.puts "#{args[2]} is \"\e[34m#{BigBrother::Settings.get(args[2])}\e[39m\""
     elsif args[1] == "set"
-      return puts "needs a key and value to set" unless (args[2] && args[3])
+      return stdout.puts "needs a key and value to set" unless (args[2] && args[3])
       BigBrother::Settings.set(args[2], args[3])
-      puts "#{args[2]} set to \"\e[34m#{args[3]}\e[39m\""
+      stdout.puts "#{args[2]} set to \"\e[34m#{args[3]}\e[39m\""
     else
-      puts "Don't know how to use command #{args[1]}"
+      stdout.puts "Don't know how to use command #{args[1]}"
     end
+  end
+
+  def self.set_output_stream(os_stream)
+    @output = os_stream
+  end
+
+  def self.stdout
+    @output || STDOUT
   end
 end

@@ -1,7 +1,13 @@
 require "json"
 
 class BigBrother::Settings
-  SETTINGS_FILE = File.expand_path("~/.big_brother.json")
+  def self.settings_file
+    @settings_file || File.expand_path("~/.big_brother.json")
+  end
+
+  def self.settings_file=(path)
+    @settings_file = path
+  end
 
   def self.defaults
     {
@@ -11,8 +17,8 @@ class BigBrother::Settings
   end
 
   def self.load
-    touch SETTINGS_FILE
-    @settings = defaults.merge(JSON.parse(File.read(SETTINGS_FILE)))
+    touch settings_file
+    @settings = defaults.merge(JSON.parse(File.read(settings_file)))
     save
   end
 
@@ -26,7 +32,7 @@ class BigBrother::Settings
   end
 
   def self.save
-    File.write(SETTINGS_FILE, @settings.to_json)
+    File.write(settings_file, @settings.to_json)
   end
 
   def self.touch(file_name)
