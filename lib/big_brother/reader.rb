@@ -9,7 +9,9 @@ class BigBrother::Reader
     hist_file     = BigBrother::Settings.get("history_file")
     old_hist_file = BigBrother::Settings.get("history_file") + ".old"
     history = File.read hist_file
-    File.write old_hist_file, history
+    File.open(old_hist_file, "a") { |f|
+      f.puts history
+    }
     File.open(hist_file, "w") {}
   end
 end
